@@ -24,18 +24,14 @@ class MyClassificationPipeline {
       return this.instance;
     }
 }
-/*
-const server = http.createServer();
-const hostname = '127.0.0.1';
-const port = 3000;
-*/
+
 app.get('/', async (req, res) => {
   
     res.setHeader('Content-Type', 'application/json');
 
-    const classificationPipeline = await MyClassificationPipeline.getInstance();
-    
-    const response = await classificationPipeline('Describe a trip in rome', {
+    const generator = await MyClassificationPipeline.getInstance();
+    const prompt = 'a trip in Vietnam'
+    const response = await generator('Describe ' + `${prompt}`, {
       max_new_tokens: 100,
     });
   
