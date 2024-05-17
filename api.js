@@ -81,20 +81,34 @@ app.post('/generatetext', apiKeyMiddleware, async (req, res) => {
   
   const prompt = req.body.prompt;
   if (!prompt) {
-    return res.status(400).json({ error: 'Prompt mancante nel corpo della richiesta' });
+    return res.status(400).json({ error: 'Missing prompt' });
   }
-  if (prompt.length >= 50) {
-    return res.status(400).json({ error: 'Il prompt deve essere meno lungo di 50 caratteri' });
+  //Data length validation
+  if (prompt.length >= 70 || prompt.length <=10) {
+    return res.status(400).json({ error: 'Description is not correct...' });
   }
+  //Regular expression for 
   if(!/^[a-zA-Z0-9\s]+$/.test(prompt)){
-    return res.status(400).json({ error: 'Il prompt deve contenere solo caratteri alfanumerici' });
+    return res.status(400).json({ error: '' });
+  }
+  //Input sanitization whitelisting
+  const sanitizedPrompt = prompt.replace(/[^\w\s]/g, ''); 
+  if (sanitizedPrompt !== prompt) {
+    return res.status(400).json({ error: 'Invalid characters in prompt' });
   }
 
-  const response = await generator('Describe ' + `${prompt}`, {
+  const possibleoutput1 = await generator('Describe ' + `${prompt}`, {
     max_new_tokens: 100,
   });
-  res.end(JSON.stringify(response));
   
+  const possibleoutput2 = await generator('Elaborate on ' + `${prompt}`, {
+    max_new_tokens: 120,
+  });
+  
+  
+  
+  //res.end(JSON.stringify(response1));
+  res.json({ possibleoutput1, possibleoutput2 });  
 });
 
 app.listen(5000, () => {
@@ -102,6 +116,7 @@ app.listen(5000, () => {
 });
 
 
-//utilizzo con API KEY * FATTO * -> Automatizzalo
+//utilizzo con API KEY * FATTO * -> Automatizzalo * FATTO *
 //input me lo devono passare oppure di default lo metto io per fare le prove * FATTO *
 //sanificazione dell'input * FATTO *
+//generare più input * FATTO *
