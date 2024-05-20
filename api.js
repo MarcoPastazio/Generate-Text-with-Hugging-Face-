@@ -116,7 +116,6 @@ app.listen(5000, () => {
 });
 
 
-//utilizzo con API KEY * FATTO * -> Automatizzalo * FATTO *
-//input me lo devono passare oppure di default lo metto io per fare le prove * FATTO *
-//sanificazione dell'input * FATTO *
-//generare più input * FATTO *
+
+
+
