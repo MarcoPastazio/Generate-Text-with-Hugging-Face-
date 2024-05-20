@@ -1,4 +1,4 @@
-//chiave Google AI
+
 //AIzaSyComwe2gy27ahLSPx2wo4PxOwFDH5hxD3w
 'use strict'
 const http = require('http');
@@ -7,7 +7,7 @@ const url = require('url');
 const express = require("express");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const apiKey = 'AIzaSyComwe2gy27ahLSPx2wo4PxOwFDH5hxD3w'
+const apiKey = ''
 
 const genAI = new GoogleGenerativeAI(apiKey);
 
