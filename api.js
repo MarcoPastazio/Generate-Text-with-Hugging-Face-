@@ -111,9 +111,13 @@ app.post('/generatetext', apiKeyMiddleware, async (req, res) => {
   res.json({ possibleoutput1, possibleoutput2 });  
 });
 
+module.exports = { app, apiKey, MyClassificationPipeline, genAPIKey, apiKeyMiddleware };
+
+
 app.listen(5000, () => {
-  console.log(`Server running on http://localhost:5000/`);
+  console.log(`Server running on http://localhost:5000`);
 });
+
 
 
 //utilizzo con API KEY * FATTO * -> Automatizzalo * FATTO *
